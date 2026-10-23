@@ -1,961 +1,493 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> جشن تولد فوق‌العاده! </title>
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts: Vazirmatn -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Canvas Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b132b">
+<title>جشن تولد فوق‌العاده!</title>
 
-    <style>
-        * {
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(135deg, #0b132b 0%, #1c2541 40%, #3a506b 70%, #5bc0be 100%);
-            background-attachment: fixed;
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Glassmorphism Styling */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        .glass-button {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
-        }
-
-        /* 3D Carousel Container */
-        .carousel-container {
-            perspective: 1400px;
-            width: 100%;
-            height: 360px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: visible;
-            z-index: 5;
-        }
-
-        .carousel-track {
-            width: min(66vw, 260px);
-            height: min(82vw, 320px);
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            will-change: transform;
-            z-index: 10;
-        }
-
-        .carousel-card {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            border: 3px solid rgba(250, 204, 21, 0.8);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(236, 72, 153, 0.5);
-            transition: all 0.5s ease;
-            cursor: pointer;
-            background: #111827;
-            backface-visibility: hidden;
-        }
-
-        .carousel-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Floating Balloons Animation */
-        .balloon {
-            position: fixed;
-            bottom: -120px;
-            opacity: 0.85;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            animation: floatUp 12s infinite linear;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .balloon::after {
-            content: "";
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 18px;
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(-120vh) rotate(30deg);
-                opacity: 0;
-            }
-        }
-
-        /* Glowing Text */
-        .glow-text {
-            text-shadow: 0 0 20px rgba(236, 72, 153, 0.8), 0 0 35px rgba(168, 85, 247, 0.6);
-        }
-
-        /* Typewriter Cursor */
-        .cursor {
-            display: inline-block;
-            width: 3px;
-            background-color: #f43f5e;
-            margin-right: 4px;
-            animation: blink 0.75s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Audio Visualizer Bars Animation */
-        .bar {
-            width: 4px;
-            height: 16px;
-            background-color: #f43f5e;
-            border-radius: 2px;
-            animation: soundWave 0.8s infinite ease-in-out alternate;
-        }
-        .bar:nth-child(1) { animation-delay: 0.1s; }
-        .bar:nth-child(2) { animation-delay: 0.3s; }
-        .bar:nth-child(3) { animation-delay: 0.2s; }
-        .bar:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes soundWave {
-            0% { height: 6px; }
-            100% { height: 26px; }
-        }
-
-        .playing .bar {
-            animation-play-state: running;
-        }
-
-        .paused .bar {
-            animation-play-state: paused;
-            height: 6px;
-        }
-
-        /* Modal Blur */
-        .modal-bg {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ec4899;
-            border-radius: 4px;
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 12px !important;
-            }
-
-            .carousel-container {
-                height: 270px;
-            }
-
-            .carousel-track {
-                width: min(62vw, 210px);
-                height: min(80vw, 260px);
-            }
-
-            .carousel-card {
-                border-width: 2px;
-                border-radius: 18px;
-            }
-
-            .glass-card {
-                border-radius: 22px !important;
-            }
-
-            header h1 {
-                font-size: clamp(2rem, 9vw, 3.1rem) !important;
-                line-height: 1.2 !important;
-            }
-
-            #typewriter-text {
-                font-size: 0.95rem !important;
-                line-height: 1.8 !important;
-            }
-
-            #start-overlay .glass-card {
-                padding: 1.5rem !important;
-            }
-
-            #start-overlay h2 {
-                font-size: clamp(1.5rem, 7vw, 2.1rem) !important;
-            }
-
-            #start-overlay p {
-                font-size: 0.85rem !important;
-            }
-
-            #start-overlay button {
-                font-size: 0.95rem !important;
-                padding: 0.9rem 1rem !important;
-            }
-
-            .glass-button {
-                padding-left: 0.8rem !important;
-                padding-right: 0.8rem !important;
-            }
-
-            .grid {
-                gap: 0.9rem !important;
-            }
-        }
-    </style>
+<style>
+:root{color-scheme:dark;--pink:#ec4899;--purple:#a855f7;--gold:#facc15}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{width:100%;min-height:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:'Vazirmatn',sans-serif;background:linear-gradient(135deg,#0b132b 0%,#1c2541 40%,#3a506b 70%,#5bc0be 100%);background-attachment:fixed;color:#fff;width:100%;min-height:100vh;min-height:100dvh;margin:0;overflow-x:hidden}
+button,input,label{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+.glass-card{background:rgba(255,255,255,.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.2);box-shadow:0 15px 35px rgba(0,0,0,.32)}
+.glass-button{background:rgba(255,255,255,.13);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.27);transition:background .2s,transform .2s,box-shadow .2s}
+.glass-button:hover{background:rgba(255,255,255,.25);box-shadow:0 8px 20px rgba(236,72,153,.25)}
+.glass-button:active{transform:scale(.97)}
+.glow-text{text-shadow:0 0 20px rgba(236,72,153,.7),0 0 35px rgba(168,85,247,.5)}
+/* The carousel gets its own clipping and stacking context so it cannot cover its controls. */
+.carousel-container{perspective:1100px;width:100%;height:clamp(620px,68vw,660px);position:relative;display:flex;justify-content:center;align-items:center;overflow:hidden;isolation:isolate;z-index:0;flex-shrink:0;touch-action:pan-y}
+.carousel-track{width:clamp(155px,24vw,245px);height:clamp(270px,34vw,340px);position:absolute;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.25,1,.5,1);will-change:transform}
+.carousel-card{position:absolute;inset:0;width:100%;height:100%;border-radius:1.25rem;overflow:hidden;border:2px solid rgba(250,204,21,.82);box-shadow:0 12px 25px rgba(0,0,0,.48),0 0 18px rgba(236,72,153,.35);cursor:pointer;background:#111827;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.carousel-card img{display:block;width:100%;height:100%;object-fit:cover}
+.carousel-controls{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,24px);width:100%;flex-wrap:wrap}
+.carousel-controls button{position:relative;z-index:3;flex-shrink:0}
+.balloon{position:fixed;bottom:-130px;opacity:.85;border-radius:50% 50% 50% 50%/40% 40% 60% 60%;animation:floatUp 12s linear forwards;z-index:1;pointer-events:none}
+.balloon:after{content:"";position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:2px;height:18px;background:rgba(255,255,255,.6)}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0);opacity:.9}100%{transform:translateY(-125vh) rotate(30deg);opacity:0}}
+.cursor{display:inline-block;width:3px;height:1.2em;vertical-align:middle;background:#f43f5e;margin-right:4px;animation:blink .75s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.bar{width:4px;height:16px;background:#f43f5e;border-radius:2px;animation:soundWave .8s infinite ease-in-out alternate}
+.bar:nth-child(1){animation-delay:.1s}.bar:nth-child(2){animation-delay:.3s}.bar:nth-child(3){animation-delay:.2s}.bar:nth-child(4){animation-delay:.4s}
+@keyframes soundWave{from{height:6px}to{height:26px}}
+.paused .bar{animation-play-state:paused;height:6px}.playing .bar{animation-play-state:running}
+.modal-bg{background:rgba(15,23,42,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#toast{padding-bottom:calc(.75rem + env(safe-area-inset-bottom,0px))}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0f172a}::-webkit-scrollbar-thumb{background:#ec4899;border-radius:4px}
+@media(max-width:640px){
+ body{padding:10px!important}
+ .page-content{gap:1rem!important;margin-top:1rem!important;margin-bottom:1rem!important}
+ .carousel-container{height:350px;perspective:850px}
+ .carousel-track{width:min(55vw,185px);height:min(76vw,265px)}
+ .glass-card{border-radius:20px!important}
+ header h1{font-size:clamp(1.8rem,8.5vw,2.8rem)!important;line-height:1.35!important}
+ #typewriter-text{font-size:.94rem!important;line-height:1.9!important}
+ .section-card{padding:1rem!important}
+ .album-toolbar{align-items:stretch!important}
+ .album-actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+ .album-actions label,.album-actions button{justify-content:center;min-width:0;padding:.65rem .5rem!important}
+ .carousel-controls{gap:8px}
+ .carousel-controls #prev-btn,.carousel-controls #next-btn{width:42px;height:42px}
+ .carousel-controls #play-pause-carousel{padding:.65rem .85rem;font-size:.8rem}
+ .main-grid{gap:1rem!important}
+}
+@media(max-width:360px){
+ body{padding:7px!important}
+ .carousel-container{height:320px}
+ .carousel-track{width:145px;height:220px}
+ .album-actions{grid-template-columns:1fr}
+ .carousel-controls{gap:6px}
+ .carousel-controls #prev-btn,.carousel-controls #next-btn{width:38px;height:38px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
 </head>
-<body class="relative flex flex-col items-center justify-between min-h-screen p-4 md:p-8">
+<body class="relative flex flex-col items-center min-h-screen p-4 md:p-8">
+<div id="start-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-5 modal-bg transition-opacity duration-500">
+  <div class="glass-card p-7 md:p-10 rounded-3xl max-w-md w-full text-center space-y-5 relative overflow-hidden">
+    <div class="absolute -top-12 -left-12 w-32 h-32 bg-pink-500/30 rounded-full blur-2xl"></div>
+    <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-purple-500/30 rounded-full blur-2xl"></div>
+    <div class="text-6xl animate-bounce relative">🎁</div>
+    <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-yellow-300 relative">دعوت‌نامه جشن تولد</h2>
+    <p class="text-sm md:text-base text-slate-200 leading-relaxed relative">یک سوپرایز ویژه با آهنگ معروف «معین - بهانه» برای شما آماده شده است!</p>
+    <button id="start-celebration-btn" class="relative w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white font-bold text-base md:text-lg shadow-xl flex items-center justify-center gap-3">
+      <i class="fa-solid fa-music text-xl"></i><span>شروع جشن و پخش موزیک</span>
+    </button>
+  </div>
+</div>
 
-    <!-- Autoplay Start Overlay Modal -->
-    <div id="start-overlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 modal-bg transition-opacity duration-500">
-        <div class="glass-card p-8 md:p-12 rounded-3xl max-w-md w-full text-center space-y-6 shadow-2xl border border-pink-500/40 relative overflow-hidden">
-            <div class="absolute -top-12 -left-12 w-32 h-32 bg-pink-500/30 rounded-full blur-2xl"></div>
-            <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-purple-500/30 rounded-full blur-2xl"></div>
-            
-            <div class="text-6xl animate-bounce">🎁</div>
-            <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-yellow-300">
-                دعوت‌نامه جشن تولد
-            </h2>
-            <p class="text-sm md:text-base text-slate-200 leading-relaxed">
-                یک سوپرایز ویژه با آهنگ معروف «معین - بهانه» برای شما آماده شده است!
-            </p>
-            <button id="start-celebration-btn" class="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white font-bold text-lg shadow-xl hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-3">
-                <i class="fa-solid fa-music text-xl animate-spin"></i>
-                <span>شروع جشن و پخش موزیک</span>
-            </button>
+<audio id="bg-audio" preload="none" loop>
+  <source src="https://dl.gisomusic.com/Music/1403/01/18/Moein%20-%20bahaneh.mp3" type="audio/mpeg">
+  مرورگر شما از پخش موزیک پشتیبانی نمی‌کند.
+</audio>
+<div id="balloons-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+<main class="page-content relative z-10 w-full max-w-4xl mx-auto flex flex-col gap-8 my-auto">
+  <header class="text-center space-y-3 glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden">
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl"></div>
+    <span class="relative inline-block px-4 py-1.5 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 rounded-full text-pink-300 text-sm font-semibold">✨ امروز یک روز بسیار خاص است ✨</span>
+    <h1 class="relative text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-yellow-300 glow-text leading-tight">تولدت مبارک عزیز دلم!</h1>
+    <div class="relative min-h-[60px] flex items-center justify-center text-base md:text-xl text-pink-100 font-medium px-2">
+      <span id="typewriter-text"></span><span class="cursor">&nbsp;</span>
+    </div>
+  </header>
+
+  <section class="section-card glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center gap-5 shadow-2xl relative">
+    <div class="album-toolbar flex flex-wrap justify-between items-center w-full gap-4 px-1 md:px-3">
+      <h2 class="text-lg md:text-2xl font-bold text-yellow-300 flex items-center gap-2"><i class="fa-solid fa-images text-pink-400"></i> آلبوم خاطرات و عکس‌ها</h2>
+      <div class="album-actions flex items-center gap-3">
+        <label class="glass-button px-4 py-2 rounded-xl text-xs md:text-sm font-semibold text-pink-200 cursor-pointer flex items-center gap-2">
+          <i class="fa-solid fa-cloud-arrow-up text-pink-400 text-lg"></i><span>افزودن عکس</span>
+          <input type="file" id="image-upload" accept="image/*" multiple class="hidden">
+        </label>
+        <button id="download-package-btn" class="glass-button px-4 py-2 rounded-xl text-xs md:text-sm font-semibold text-yellow-300 border border-yellow-500/40 flex items-center gap-2">
+          <i class="fa-solid fa-download text-yellow-400"></i><span>دانلود خروجی آفلاین</span>
+        </button>
+      </div>
+    </div>
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel-track"></div>
+    </div>
+    <div class="carousel-controls">
+      <button id="prev-btn" class="glass-button w-12 h-12 rounded-full flex items-center justify-center text-xl text-pink-300" title="عکس قبلی" aria-label="عکس قبلی"><i class="fa-solid fa-chevron-right"></i></button>
+      <button id="play-pause-carousel" class="glass-button px-5 py-2.5 rounded-full flex items-center gap-2 text-sm text-yellow-300 font-semibold"><i class="fa-solid fa-pause" id="play-icon"></i><span id="play-status">توقف چرخش</span></button>
+      <button id="next-btn" class="glass-button w-12 h-12 rounded-full flex items-center justify-center text-xl text-pink-300" title="عکس بعدی" aria-label="عکس بعدی"><i class="fa-solid fa-chevron-left"></i></button>
+    </div>
+  </section>
+
+  <div class="main-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section class="glass-card p-5 md:p-6 rounded-3xl flex flex-col justify-between gap-5">
+      <div>
+        <h3 class="text-lg font-bold text-pink-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-music"></i> پخش‌کننده اختصاصی موزیک</h3>
+        <p class="text-xs text-slate-300">معین - بهانه (آهنگ اصلی جشن)</p>
+      </div>
+      <div class="bg-slate-900/60 p-4 rounded-2xl flex flex-col gap-4 border border-white/10">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div id="visualizer" class="flex items-end gap-1 h-6 paused shrink-0"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+            <div class="min-w-0"><div class="text-sm font-bold text-white">معین - بهانه</div><div class="text-xs text-pink-300" id="music-state">در انتظار شروع...</div></div>
+          </div>
+          <button id="toggle-music-btn" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0" aria-label="پخش یا توقف موزیک"><i class="fa-solid fa-play text-lg" id="music-icon"></i></button>
         </div>
+        <div class="flex items-center gap-3"><i class="fa-solid fa-volume-high text-xs text-slate-400"></i><input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.9" class="w-full accent-pink-500 cursor-pointer" aria-label="تنظیم صدا"></div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <button id="confetti-btn" class="glass-button py-3 px-3 rounded-2xl text-xs md:text-sm font-bold text-yellow-300 flex items-center justify-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-yellow-400"></i><span>شلیک کاغذ رنگی</span></button>
+        <button id="balloons-btn" class="glass-button py-3 px-3 rounded-2xl text-xs md:text-sm font-bold text-pink-300 flex items-center justify-center gap-2"><i class="fa-solid fa-balloon text-pink-400"></i><span>پرواز بادکنک‌ها</span></button>
+      </div>
+    </section>
+
+    <section class="glass-card p-5 md:p-6 rounded-3xl flex flex-col justify-between gap-4">
+      <div>
+        <h3 class="text-lg font-bold text-purple-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-gift"></i> آرزو کن و شمع رو فوت کن!</h3>
+        <p class="text-xs text-slate-300">روی شعله کلیک کن تا خاموش بشه و آرزوت برآورده شه!</p>
+      </div>
+      <div class="bg-slate-900/60 p-5 rounded-2xl text-center border border-white/10 flex flex-col items-center justify-center gap-3">
+        <button id="candle-flame" class="text-4xl text-yellow-400 transition-transform duration-300 hover:scale-125" title="برای فوت کردن کلیک کن" aria-label="خاموش یا روشن کردن شمع">🔥</button>
+        <div id="candle-status" class="text-sm font-semibold text-yellow-200">روی شعله کلیک کن!</div>
+      </div>
+      <button id="random-wish-btn" class="w-full glass-button py-3 rounded-2xl text-xs md:text-sm font-semibold text-purple-200 flex items-center justify-center gap-2"><i class="fa-solid fa-sparkles text-purple-400"></i><span>نمایش متن تبریک بعدی</span></button>
+    </section>
+  </div>
+
+  <footer class="text-center text-xs text-slate-300 py-4 leading-7">طراحی شده با ❤️ برای بهترین روز زندگی‌ات<br>عکس‌های افزوده‌شده در همین مرورگر ذخیره می‌شوند؛ برای پخش موسیقی و بارگذاری فونت به اینترنت نیاز است.</footer>
+</main>
+
+<div id="image-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 modal-bg hidden opacity-0 transition-opacity duration-300">
+  <div class="relative max-w-2xl w-full max-h-[92dvh] bg-slate-900/95 rounded-3xl overflow-hidden border border-white/20 p-2 shadow-2xl flex flex-col items-center">
+    <button id="close-modal-btn" class="absolute top-3 right-3 z-10 w-10 h-10 bg-black/70 text-white rounded-full flex items-center justify-center text-lg" aria-label="بستن"><i class="fa-solid fa-xmark"></i></button>
+    <img id="modal-img" src="" alt="پیش‌نمایش عکس" class="max-h-[75dvh] max-w-full w-auto object-contain rounded-2xl">
+    <div class="flex justify-between items-center gap-3 w-full px-3 py-3">
+      <span id="modal-caption" class="text-xs text-slate-300">عکس یادگاری</span>
+      <button id="delete-photo-btn" class="text-xs bg-red-500/20 text-red-300 border border-red-500/40 px-3 py-2 rounded-xl flex items-center gap-2"><i class="fa-solid fa-trash"></i> حذف عکس</button>
     </div>
-
-    <!-- Audio Element -->
-    <audio id="bg-audio" preload="auto" loop>
-        <source src="https://dl.gisomusic.com/Music/1403/01/18/Moein%20-%20bahaneh.mp3" type="audio/mpeg">
-        مرورگر شما از پخش موزیک پشتیبانی نمی‌کند.
-    </audio>
-
-    <!-- Floating Balloons Background -->
-    <div id="balloons-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
-
-    <!-- Main Content Container -->
-    <div class="relative z-10 w-full max-w-4xl mx-auto flex flex-col gap-8 my-auto">
-        
-        <!-- Header Section -->
-        <header class="text-center space-y-3 glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl"></div>
-            
-            <span class="inline-block px-4 py-1.5 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 rounded-full text-pink-300 text-sm font-semibold tracking-wide">
-                ✨ امروز یک روز بسیار خاص است ✨
-            </span>
-            
-            <h1 class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-yellow-300 glow-text leading-tight">
-                تولدت مبارک عزیز دلم! 
-            </h1>
-            
-            <!-- Typewriter Wishes Paragraph -->
-            <div class="min-h-[60px] flex items-center justify-center text-base md:text-xl text-pink-100 font-medium px-4">
-                <span id="typewriter-text"></span><span class="cursor">&nbsp;</span>
-            </div>
-        </header>
-
-        <!-- 3D Photo Album Carousel Section -->
-        <section class="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center gap-6 shadow-2xl relative">
-            <div class="flex flex-wrap justify-between items-center w-full gap-4 px-2 md:px-4">
-                <h2 class="text-lg md:text-2xl font-bold text-yellow-300 flex items-center gap-2">
-                    <i class="fa-solid fa-images text-pink-400"></i> آلبوم خاطرات و عکس‌ها
-                </h2>
-                
-                <div class="flex items-center gap-3">
-                    <!-- Upload Custom Images -->
-                    <label class="glass-button px-4 py-2 rounded-xl text-xs md:text-sm font-semibold text-pink-200 cursor-pointer flex items-center gap-2 hover:text-white transition">
-                        <i class="fa-solid fa-cloud-arrow-up text-pink-400 text-lg"></i>
-                        <span>افزودن عکس</span>
-                        <input type="file" id="image-upload" accept="image/*" multiple class="hidden">
-                    </label>
-
-                    <!-- Save / Download Offline Package -->
-                    <button id="download-package-btn" class="glass-button px-4 py-2 rounded-xl text-xs md:text-sm font-semibold text-yellow-300 border border-yellow-500/40 hover:text-white transition flex items-center gap-2">
-                        <i class="fa-solid fa-download text-yellow-400"></i>
-                        <span>دانلود خروجی آفلاین</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 3D Carousel Display -->
-            <div class="carousel-container my-2">
-                <div class="carousel-track" id="carousel-track">
-                    <!-- Dynamic Cards Inserted via JS -->
-                </div>
-            </div>
-
-            <!-- Carousel Controls -->
-            <div class="flex items-center gap-6 z-20 relative">
-                <button id="prev-btn" class="glass-button w-12 h-12 rounded-full flex items-center justify-center text-xl text-pink-300 hover:text-white active:scale-95" title="عکس قبلی">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
-                <button id="play-pause-carousel" class="glass-button px-5 py-2.5 rounded-full flex items-center gap-2 text-sm text-yellow-300 hover:text-white font-semibold">
-                    <i class="fa-solid fa-pause" id="play-icon"></i>
-                    <span id="play-status">توقف چرخش</span>
-                </button>
-                <button id="next-btn" class="glass-button w-12 h-12 rounded-full flex items-center justify-center text-xl text-pink-300 hover:text-white active:scale-95" title="عکس بعدی">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- Music Player & Interactive Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Music Player Container -->
-            <div class="glass-card p-6 rounded-3xl flex flex-col justify-between gap-6">
-                <div>
-                    <h3 class="text-lg font-bold text-pink-300 mb-1 flex items-center gap-2">
-                        <i class="fa-solid fa-music"></i> پخش‌کننده اختصاصی موزیک
-                    </h3>
-                    <p class="text-xs text-slate-300">معین - بهانه (آهنگ اصلی جشن)</p>
-                </div>
-
-                <!-- Music Control Panel -->
-                <div class="bg-slate-900/60 p-4 rounded-2xl flex flex-col gap-4 border border-white/10">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <!-- Visualizer Icon -->
-                            <div id="visualizer" class="flex items-end gap-1 h-6 paused">
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                                <div class="bar"></div>
-                            </div>
-                            <div>
-                                <div class="text-sm font-bold text-white">معین - بهانه</div>
-                                <div class="text-xs text-pink-300" id="music-state">در حال آماده‌سازی...</div>
-                            </div>
-                        </div>
-
-                        <!-- Play/Pause Button -->
-                        <button id="toggle-music-btn" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg">
-                            <i class="fa-solid fa-play text-lg" id="music-icon"></i>
-                        </button>
-                    </div>
-
-                    <!-- Volume Control Slider -->
-                    <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-volume-high text-xs text-slate-400"></i>
-                        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.9" class="w-full accent-pink-500 h-1.5 bg-slate-700 rounded-lg cursor-pointer">
-                    </div>
-                </div>
-
-                <!-- Celebration Action Buttons -->
-                <div class="grid grid-cols-2 gap-3">
-                    <button id="confetti-btn" class="glass-button py-3 px-4 rounded-2xl text-xs md:text-sm font-bold text-yellow-300 flex items-center justify-center gap-2 border border-yellow-500/30 hover:text-white transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-lg text-yellow-400"></i>
-                        <span>شلیک کاغذ رنگی</span>
-                    </button>
-                    <button id="balloons-btn" class="glass-button py-3 px-4 rounded-2xl text-xs md:text-sm font-bold text-pink-300 flex items-center justify-center gap-2 border border-pink-500/30 hover:text-white transition">
-                        <i class="fa-solid fa-balloon text-lg text-pink-400"></i>
-                        <span>پرواز بادکنک‌ها</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Candle Blow Out & Wish Card -->
-            <div class="glass-card p-6 rounded-3xl flex flex-col justify-between gap-4">
-                <div>
-                    <h3 class="text-lg font-bold text-purple-300 mb-1 flex items-center gap-2">
-                        <i class="fa-solid fa-gift"></i> آرزو کن و شمع رو فوت کن!
-                    </h3>
-                    <p class="text-xs text-slate-300">روی شمع کلیک کن تا خاموش بشه و آرزوت برآورده شه!</p>
-                </div>
-
-                <!-- Interactive Candle Box -->
-                <div class="bg-slate-900/60 p-5 rounded-2xl text-center border border-white/10 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-                    <div id="candle-flame" class="text-4xl text-yellow-400 animate-bounce cursor-pointer transition-transform duration-300 hover:scale-125" title="برای فوت کردن کلیک کن">
-                        🔥
-                    </div>
-                    <div id="candle-status" class="text-sm font-semibold text-yellow-200">
-                        روی شعله کلیک کن!
-                    </div>
-                </div>
-
-                <!-- New Wish Generator -->
-                <button id="random-wish-btn" class="w-full glass-button py-3 rounded-2xl text-xs md:text-sm font-semibold text-purple-200 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-sparkles text-purple-400"></i>
-                    <span>نمایش متن تبریک بعدی</span>
-                </button>
-            </div>
-
-        </div>
-
-        <!-- Footer -->
-        <footer class="text-center text-xs text-slate-300 py-4">
-            طراحی شده با ❤️ برای بهترین روز زندگی‌ات | تمامی تصاویر و تنظیمات شما به‌صورت آفلاین ذخیره می‌شوند.
-        </footer>
-
-    </div>
-
-    <!-- Full-screen Image Preview Modal -->
-    <div id="image-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden opacity-0 transition-opacity duration-300">
-        <div class="relative max-w-2xl w-full bg-slate-900/90 rounded-3xl overflow-hidden border border-white/20 p-2 shadow-2xl flex flex-col items-center">
-            <button id="close-modal-btn" class="absolute top-4 right-4 z-10 w-10 h-10 bg-black/60 text-white rounded-full flex items-center justify-center text-lg hover:bg-red-600 transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img id="modal-img" src="" alt="پیش نمایش عکس" class="max-h-[75vh] w-auto object-contain rounded-2xl">
-            <div class="flex justify-between items-center w-full px-4 py-3">
-                <span id="modal-caption" class="text-xs text-slate-300">عکس یادگاری</span>
-                <button id="delete-photo-btn" class="text-xs bg-red-500/20 text-red-300 border border-red-500/40 px-3 py-1.5 rounded-xl hover:bg-red-600 hover:text-white transition flex items-center gap-2">
-                    <i class="fa-solid fa-trash"></i> حذف عکس
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white px-6 py-3 rounded-full border border-pink-500/50 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-[60]">
-        <i class="fa-solid fa-star text-yellow-400"></i>
-        <span id="toast-message">پیام سیستم</span>
-    </div>
-
-    <!-- JavaScript Implementation -->
-    <script>
-        // --- 1. Default Data & Wish Messages ---
-        const defaultImages = [
-           "https://lh3.googleusercontent.com/d/1w-T_gs6mvwlNMq2Jchm_eJ2IRUZAigsh",
-            "https://lh3.googleusercontent.com/d/1HVCWoOxfY04TnveqFtL5wNM2dEcgjtYy",
-            "https://lh3.googleusercontent.com/d/1qmPAxOxoroxEl8nsTe2IlnwPDQA5PJxQ",
-            "https://lh3.googleusercontent.com/d/1WSdz9iNMkRNebYCP7_FKXFHCOj4So_Rm",
-            "https://lh3.googleusercontent.com/d/1NXZRrMxb5fXjyjlbBRrdt8f-Z6M5-7Qp",
-            "https://lh3.googleusercontent.com/d/14B8r8Thp-dxkvNzW184islaHsf4kwPBL",
-            "https://lh3.googleusercontent.com/d/1Q3OD_DyeQhHnHtK3MjnVknljqWRdsmMY",
-            "https://lh3.googleusercontent.com/d/18jiCWhYXedEP8cNcxozeCs5LokmCmb6r",
-            "https://lh3.googleusercontent.com/d/1VOjOvkdwZVY7dT3B7PgURYCBNBdyrtAw"
-        ];
-
-        const wishMessages = [
-            "امیدوارم سال جدید زندگیت پر از خنده‌های از ته دل، سلامتی و موفقیت‌های بزرگ باشه! ✨",
-            "امروز روز توست! روزی که زمین با اومدنت قشنگ‌تر شد. تولدت خیلی مبارک! 🌸💖",
-            "آرزو می‌کنم تمام رویاهای قشنگت یکی‌یکی تبدیل به خاطره‌های واقعی بشن! 🎂🎈",
-            "زندگیت مثل این جشن، همیشه پر از رنگ، نور و شادی‌های بی‌دلیل باشه! 🌟🎉",
-            "مرسی که با حضورت دنیا رو جای قشنگ‌تری می‌کنی. بهترین‌ها سهم قلب مهربونت! ❤️"
-        ];
-
-        let galleryImages = [];
-        let activeModalIndex = -1;
-        let currentWishIndex = 0;
-        let carouselAngle = 0;
-        let autoRotateInterval = null;
-        let isAutoRotating = true;
-
-        // --- 2. IndexedDB Persistence Layer ---
-        const DB_NAME = "BirthdayAppDB";
-        const STORE_NAME = "photos";
-
-        function openDB() {
-            return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 1);
-                request.onupgradeneeded = (e) => {
-                    const db = e.target.result;
-                    if (!db.objectStoreNames.contains(STORE_NAME)) {
-                        db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
-                    }
-                };
-                request.onsuccess = (e) => resolve(e.target.result);
-                request.onerror = (e) => reject(e.target.error);
-            });
-        }
-
-        async function saveImageToDB(base64Data) {
-            const db = await openDB();
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(STORE_NAME, "readwrite");
-                const store = tx.objectStore(STORE_NAME);
-                const req = store.add({ data: base64Data, timestamp: Date.now() });
-                req.onsuccess = () => resolve(req.result);
-                req.onerror = () => reject(req.error);
-            });
-        }
-
-        async function loadStoredImages() {
-            try {
-                const db = await openDB();
-                return new Promise((resolve, reject) => {
-                    const tx = db.transaction(STORE_NAME, "readonly");
-                    const store = tx.objectStore(STORE_NAME);
-                    const req = store.getAll();
-                    req.onsuccess = () => {
-                        const saved = req.result.map(item => item.data);
-                        resolve(saved);
-                    };
-                    req.onerror = () => reject(req.error);
-                });
-            } catch (e) {
-                console.error("IndexedDB error:", e);
-                return [];
-            }
-        }
-
-        async function clearStoredImages() {
-            const db = await openDB();
-            const tx = db.transaction(STORE_NAME, "readwrite");
-            tx.objectStore(STORE_NAME).clear();
-        }
-
-        // --- 3. DOM Elements ---
-        const startOverlay = document.getElementById('start-overlay');
-        const startBtn = document.getElementById('start-celebration-btn');
-        const carouselTrack = document.getElementById('carousel-track');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const playPauseBtn = document.getElementById('play-pause-carousel');
-        const playIcon = document.getElementById('play-icon');
-        const playStatus = document.getElementById('play-status');
-        const imageUpload = document.getElementById('image-upload');
-        const typewriterElement = document.getElementById('typewriter-text');
-        
-        // Music Player Elements
-        const bgAudio = document.getElementById('bg-audio');
-        const toggleMusicBtn = document.getElementById('toggle-music-btn');
-        const musicIcon = document.getElementById('music-icon');
-        const musicState = document.getElementById('music-state');
-        const volumeSlider = document.getElementById('volume-slider');
-        const visualizer = document.getElementById('visualizer');
-
-        // Buttons & Candle Elements
-        const confettiBtn = document.getElementById('confetti-btn');
-        const balloonsBtn = document.getElementById('balloons-btn');
-        const candleFlame = document.getElementById('candle-flame');
-        const candleStatus = document.getElementById('candle-status');
-        const randomWishBtn = document.getElementById('random-wish-btn');
-        const downloadPackageBtn = document.getElementById('download-package-btn');
-
-        // Modal Elements
-        const imageModal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-img');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const deletePhotoBtn = document.getElementById('delete-photo-btn');
-
-        // --- 4. Audio Control & Autoplay Handler ---
-        function playMusic() {
-            bgAudio.volume = volumeSlider.value;
-            bgAudio.play().then(() => {
-                musicIcon.className = 'fa-solid fa-pause text-lg';
-                musicState.textContent = 'در حال پخش: معین - بهانه';
-                visualizer.classList.remove('paused');
-                visualizer.classList.add('playing');
-            }).catch(err => {
-                console.warn("Autoplay error:", err);
-                musicState.textContent = 'جهت پخش کلیک کنید';
-            });
-        }
-
-        function toggleAudio() {
-            if (bgAudio.paused) {
-                playMusic();
-                showToast("🎵 پخش موزیک معین - بهانه");
-            } else {
-                bgAudio.pause();
-                musicIcon.className = 'fa-solid fa-play text-lg';
-                musicState.textContent = 'متوقف شد';
-                visualizer.classList.remove('playing');
-                visualizer.classList.add('paused');
-                showToast("موزیک متوقف شد");
-            }
-        }
-
-        // Start celebration trigger
-        function triggerStartCelebration() {
-            startOverlay.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => startOverlay.style.display = 'none', 500);
-            
-            playMusic();
-            fireConfetti();
-            createBalloons(15);
-        }
-
-        startBtn.addEventListener('click', triggerStartCelebration);
-
-        // Global first-click interaction fallback for audio
-        document.body.addEventListener('click', function firstTouchAudio() {
-            if (bgAudio.paused && startOverlay.style.display !== 'none') {
-                triggerStartCelebration();
-            }
-            document.body.removeEventListener('click', firstTouchAudio);
-        }, { once: true });
-
-        volumeSlider.addEventListener('input', (e) => {
-            bgAudio.volume = e.target.value;
-        });
-
-        toggleMusicBtn.addEventListener('click', toggleAudio);
-
-        // --- 5. 3D Carousel Logic ---
-        function renderCarousel() {
-            carouselTrack.innerHTML = '';
-            const totalCards = galleryImages.length;
-            if (totalCards === 0) return;
-
-            const angleIncrement = 360 / totalCards;
-            const safeTotal = Math.max(2, totalCards);
-            const radius = Math.min(190, Math.round(170 / Math.tan(Math.PI / safeTotal)));
-
-            galleryImages.forEach((src, index) => {
-                const card = document.createElement('div');
-                card.className = 'carousel-card';
-                
-                const cardAngle = angleIncrement * index;
-                card.style.transform = `rotateY(${cardAngle}deg) translateZ(${Math.max(radius, 150)}px)`;
-                
-                const img = document.createElement('img');
-                img.src = src;
-                img.alt = `عکس یادگاری ${index + 1}`;
-                img.onerror = () => {
-                    img.src = `https://placehold.co/600x800/1c2541/FFF?text=عکس+تولد+${index + 1}`;
-                };
-
-                card.addEventListener('click', () => openImageModal(index));
-
-                card.appendChild(img);
-                carouselTrack.appendChild(card);
-            });
-        }
-
-        function rotateCarousel() {
-            carouselTrack.style.transform = `rotateY(${carouselAngle}deg)`;
-        }
-
-        function nextSlide() {
-            if (galleryImages.length === 0) return;
-            const angleIncrement = 360 / galleryImages.length;
-            carouselAngle -= angleIncrement;
-            rotateCarousel();
-        }
-
-        function prevSlide() {
-            if (galleryImages.length === 0) return;
-            const angleIncrement = 360 / galleryImages.length;
-            carouselAngle += angleIncrement;
-            rotateCarousel();
-        }
-
-        function startAutoRotation() {
-            if (!autoRotateInterval) {
-                autoRotateInterval = setInterval(nextSlide, 3200);
-            }
-            isAutoRotating = true;
-            playIcon.className = 'fa-solid fa-pause';
-            playStatus.textContent = 'توقف چرخش';
-        }
-
-        function stopAutoRotation() {
-            if (autoRotateInterval) {
-                clearInterval(autoRotateInterval);
-                autoRotateInterval = null;
-            }
-            isAutoRotating = false;
-            playIcon.className = 'fa-solid fa-play';
-            playStatus.textContent = 'شروع چرخش';
-        }
-
-        // Upload custom image
-        imageUpload.addEventListener('change', async (e) => {
-            const files = Array.from(e.target.files);
-            if (files.length > 0) {
-                for (const file of files) {
-                    const reader = new FileReader();
-                    reader.onload = async (event) => {
-                        const base64 = event.target.result;
-                        galleryImages.unshift(base64);
-                        await saveImageToDB(base64);
-                        renderCarousel();
-                        rotateCarousel();
-                    };
-                    reader.readAsDataURL(file);
-                }
-                showToast("عکس جدید اضافه شد و محفوظ ماند 📸");
-            }
-        });
-
-        // --- 6. Full-screen Modal Controls ---
-        function openImageModal(index) {
-            activeModalIndex = index;
-            modalImg.src = galleryImages[index];
-            imageModal.classList.remove('hidden');
-            setTimeout(() => imageModal.classList.remove('opacity-0'), 10);
-            stopAutoRotation();
-        }
-
-        function closeModal() {
-            imageModal.classList.add('opacity-0');
-            setTimeout(() => {
-                imageModal.classList.add('hidden');
-                activeModalIndex = -1;
-            }, 300);
-        }
-
-        closeModalBtn.addEventListener('click', closeModal);
-        imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) closeModal();
-        });
-
-        deletePhotoBtn.addEventListener('click', async () => {
-            if (activeModalIndex > -1) {
-                galleryImages.splice(activeModalIndex, 1);
-                closeModal();
-                
-                // Re-save remaining user uploaded images
-                await clearStoredImages();
-                for (const img of galleryImages) {
-                    if (img.startsWith('data:image')) {
-                        await saveImageToDB(img);
-                    }
-                }
-                
-                if (galleryImages.length === 0) galleryImages = [...defaultImages];
-                renderCarousel();
-                rotateCarousel();
-                showToast("عکس حذف شد");
-            }
-        });
-
-        // --- 7. Export / Download Standalone Offline HTML File ---
-        downloadPackageBtn.addEventListener('click', () => {
-            showToast("در حال آماده‌سازی فایل آفلاین...");
-            
-            // Generate a cloned HTML string with embedded gallery state
-            const currentHTML = document.documentElement.outerHTML;
-            
-            // Script patch to embed the images directly into offline file
-            const scriptInject = `<script>
-                window.INITIAL_OFFLINE_IMAGES = ${JSON.stringify(galleryImages)};
-            <\/script>`;
-
-            const modifiedHTML = currentHTML.replace('</head>', `${scriptInject}</head>`);
-
-            const blob = new Blob([modifiedHTML], { type: 'text/html;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `جشن_تولد_سوپرایز_${new Date().toISOString().slice(0,10)}.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-
-            showToast("فایل آفلاین با موفقیت دانلود شد! 💾");
-        });
-
-        // --- 8. Typewriter Effect ---
-        let typingTimeout = null;
-
-        function typeWriter(text, charIndex = 0) {
-            if (charIndex === 0) {
-                typewriterElement.textContent = '';
-            }
-            
-            if (charIndex < text.length) {
-                typewriterElement.textContent += text.charAt(charIndex);
-                typingTimeout = setTimeout(() => typeWriter(text, charIndex + 1), 55);
-            }
-        }
-
-        function triggerNextWish() {
-            clearTimeout(typingTimeout);
-            currentWishIndex = (currentWishIndex + 1) % wishMessages.length;
-            typeWriter(wishMessages[currentWishIndex]);
-        }
-
-        // --- 9. Balloons & Confetti ---
-        function createBalloons(count = 15) {
-            const container = document.getElementById('balloons-container');
-            const colors = ['#ec4899', '#a855f7', '#eab308', '#3b82f6', '#10b981', '#f43f5e'];
-
-            for (let i = 0; i < count; i++) {
-                const balloon = document.createElement('div');
-                balloon.className = 'balloon';
-                
-                const size = Math.floor(Math.random() * 25) + 35;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const left = Math.random() * 100;
-                const duration = Math.random() * 8 + 8;
-                const delay = Math.random() * 4;
-
-                balloon.style.width = `${size}px`;
-                balloon.style.height = `${size * 1.25}px`;
-                balloon.style.background = `radial-gradient(circle at 30% 30%, ${color}, #000000 90%)`;
-                balloon.style.left = `${left}%`;
-                balloon.style.animationDuration = `${duration}s`;
-                balloon.style.animationDelay = `${delay}s`;
-
-                container.appendChild(balloon);
-
-                setTimeout(() => {
-                    balloon.remove();
-                }, (duration + delay) * 1000);
-            }
-        }
-
-        function fireConfetti() {
-            const duration = 3 * 1000;
-            const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
-
-            function randomInRange(min, max) {
-                return Math.random() * (max - min) + min;
-            }
-
-            const interval = setInterval(function() {
-                const timeLeft = animationEnd - Date.now();
-
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
-
-                const particleCount = 50 * (timeLeft / duration);
-                
-                confetti(Object.assign({}, defaults, { 
-                    particleCount, 
-                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-                    colors: ['#ec4899', '#a855f7', '#facc15', '#ffffff']
-                }));
-                confetti(Object.assign({}, defaults, { 
-                    particleCount, 
-                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-                    colors: ['#ec4899', '#a855f7', '#facc15', '#ffffff']
-                }));
-            }, 250);
-        }
-
-        // --- 10. Notifications ---
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toast-message');
-            toastMessage.textContent = msg;
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-            toast.classList.add('opacity-100');
-
-            setTimeout(() => {
-                toast.classList.remove('opacity-100');
-                toast.classList.add('opacity-0', 'pointer-events-none');
-            }, 3000);
-        }
-
-        // --- 11. Event Listeners ---
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
-
-        playPauseBtn.addEventListener('click', () => {
-            if (isAutoRotating) {
-                stopAutoRotation();
-                showToast("چرخش متوقف شد");
-            } else {
-                startAutoRotation();
-                showToast("چرخش فعال شد");
-            }
-        });
-
-        confettiBtn.addEventListener('click', () => {
-            fireConfetti();
-            showToast("🎉 تولدت مبارک!");
-        });
-
-        balloonsBtn.addEventListener('click', () => {
-            createBalloons(20);
-            showToast("🎈 بادکنک‌ها پرواز کردند!");
-        });
-
-        randomWishBtn.addEventListener('click', () => {
-            triggerNextWish();
-            showToast("پیام آرزوی جدید دریافت شد! ✨");
-        });
-
-        // Candle Blow Out Interaction
-        candleFlame.addEventListener('click', () => {
-            if (candleFlame.textContent.trim() === '🔥') {
-                candleFlame.textContent = '💨';
-                candleStatus.textContent = 'آرزوت برآورده شد! شمع خاموش شد 🎂✨';
-                fireConfetti();
-                showToast("✨ آرزوی قشنگت مستجاب میشه!");
-                setTimeout(() => {
-                    candleFlame.textContent = '🕯️';
-                }, 1500);
-            } else if (candleFlame.textContent.trim() === '🕯️') {
-                candleFlame.textContent = '🔥';
-                candleStatus.textContent = 'روی شعله کلیک کن تا آرزوت برآورده بشه!';
-            }
-        });
-
-        // --- 12. App Initialization ---
-        window.addEventListener('DOMContentLoaded', async () => {
-            let stored = [];
-            if (window.INITIAL_OFFLINE_IMAGES && window.INITIAL_OFFLINE_IMAGES.length > 0) {
-                stored = window.INITIAL_OFFLINE_IMAGES;
-            } else {
-                stored = await loadStoredImages();
-            }
-
-            if (stored.length > 0) {
-                galleryImages = stored;
-            } else {
-                galleryImages = [...defaultImages];
-            }
-
-            renderCarousel();
-            rotateCarousel();
-            startAutoRotation();
-            typeWriter(wishMessages[0]);
-            createBalloons(10);
-        });
-    </script>
+  </div>
+</div>
+
+<div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900/95 text-white px-5 py-3 rounded-full border border-pink-500/50 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-[60] text-sm max-w-[92vw] text-center">
+  <i class="fa-solid fa-star text-yellow-400"></i> <span id="toast-message">پیام سیستم</span>
+</div>
+
+<script>
+'use strict';
+
+const defaultImages = [
+ 'https://lh3.googleusercontent.com/d/1w-T_gs6mvwlNMq2Jchm_eJ2IRUZAigsh',
+ 'https://lh3.googleusercontent.com/d/1HVCWoOxfY04TnveqFtL5wNM2dEcgjtYy',
+ 'https://lh3.googleusercontent.com/d/1qmPAxOxoroxEl8nsTe2IlnwPDQA5PJxQ',
+ 'https://lh3.googleusercontent.com/d/1WSdz9iNMkRNebYCP7_FKXFHCOj4So_Rm',
+ 'https://lh3.googleusercontent.com/d/1NXZRrMxb5fXjyjlbBRrdt8f-Z6M5-7Qp',
+ 'https://lh3.googleusercontent.com/d/14B8r8Thp-dxkvNzW184islaHsf4kwPBL',
+ 'https://lh3.googleusercontent.com/d/1Q3OD_DyeQhHnHtK3MjnVknljqWRdsmMY',
+ 'https://lh3.googleusercontent.com/d/18jiCWhYXedEP8cNcxozeCs5LokmCmb6r',
+ 'https://lh3.googleusercontent.com/d/1VOjOvkdwZVY7dT3B7PgURYCBNBdyrtAw'
+];
+const wishMessages = [
+ 'امیدوارم سال جدید زندگیت پر از خنده‌های از ته دل، سلامتی و موفقیت‌های بزرگ باشه! ✨',
+ 'امروز روز توست! روزی که زمین با اومدنت قشنگ‌تر شد. تولدت خیلی مبارک! 🌸💖',
+ 'آرزو می‌کنم تمام رویاهای قشنگت یکی‌یکی تبدیل به خاطره‌های واقعی بشن! 🎂🎈',
+ 'زندگیت مثل این جشن، همیشه پر از رنگ، نور و شادی‌های بی‌دلیل باشه! 🌟🎉',
+ 'مرسی که با حضورت دنیا رو جای قشنگ‌تری می‌کنی. بهترین‌ها سهم قلب مهربونت! ❤️'
+];
+
+let galleryImages = [];
+let activeModalIndex = -1;
+let currentWishIndex = 0;
+let carouselAngle = 0;
+let autoRotateInterval = null;
+let isAutoRotating = false;
+let typingTimeout = null;
+let toastTimeout = null;
+
+const $ = id => document.getElementById(id);
+const startOverlay = $('start-overlay');
+const startBtn = $('start-celebration-btn');
+const carouselTrack = $('carousel-track');
+const imageUpload = $('image-upload');
+const bgAudio = $('bg-audio');
+const volumeSlider = $('volume-slider');
+const musicIcon = $('music-icon');
+const musicState = $('music-state');
+const visualizer = $('visualizer');
+const imageModal = $('image-modal');
+const modalImg = $('modal-img');
+const candleFlame = $('candle-flame');
+const candleStatus = $('candle-status');
+
+const DB_NAME = 'BirthdayAppDB';
+const STORE_NAME = 'photos';
+
+function openDB() {
+ return new Promise((resolve, reject) => {
+  if (!('indexedDB' in window)) return reject(new Error('IndexedDB در دسترس نیست'));
+  const request = indexedDB.open(DB_NAME, 1);
+  request.onupgradeneeded = event => {
+   const db = event.target.result;
+   if (!db.objectStoreNames.contains(STORE_NAME)) db.createObjectStore(STORE_NAME, {keyPath:'id',autoIncrement:true});
+  };
+  request.onsuccess = event => resolve(event.target.result);
+  request.onerror = () => reject(request.error);
+ });
+}
+async function saveImageToDB(data) {
+ const db = await openDB();
+ return new Promise((resolve,reject) => {
+  const tx = db.transaction(STORE_NAME,'readwrite');
+  const req = tx.objectStore(STORE_NAME).add({data,timestamp:Date.now()});
+  req.onsuccess = () => resolve(req.result);
+  req.onerror = () => reject(req.error);
+  tx.oncomplete = () => db.close();
+  tx.onerror = () => { db.close(); reject(tx.error); };
+ });
+}
+async function loadStoredImages() {
+ try {
+  const db = await openDB();
+  return await new Promise((resolve,reject) => {
+   const tx = db.transaction(STORE_NAME,'readonly');
+   const req = tx.objectStore(STORE_NAME).getAll();
+   req.onsuccess = () => resolve(req.result.sort((a,b)=>a.timestamp-b.timestamp).map(item=>item.data));
+   req.onerror = () => reject(req.error);
+   tx.oncomplete = () => db.close();
+  });
+ } catch (error) { console.warn('IndexedDB:',error); return []; }
+}
+async function replaceStoredImages(images) {
+ try {
+  const db = await openDB();
+  await new Promise((resolve,reject) => {
+   const tx = db.transaction(STORE_NAME,'readwrite');
+   const store = tx.objectStore(STORE_NAME);
+   store.clear();
+   images.filter(src => typeof src === 'string' && src.startsWith('data:image/')).forEach(data => store.add({data,timestamp:Date.now()}));
+   tx.oncomplete = resolve;
+   tx.onerror = () => reject(tx.error);
+   tx.onabort = () => reject(tx.error);
+  });
+  db.close();
+ } catch (error) { console.warn('ذخیره عکس‌ها انجام نشد:',error); }
+}
+function showToast(message) {
+ const toast = $('toast');
+ $('toast-message').textContent = message;
+ toast.classList.remove('opacity-0','pointer-events-none');
+ toast.classList.add('opacity-100');
+ clearTimeout(toastTimeout);
+ toastTimeout = setTimeout(()=>{toast.classList.add('opacity-0','pointer-events-none');toast.classList.remove('opacity-100');},2800);
+}
+function playMusic() {
+ bgAudio.volume = Number(volumeSlider.value);
+ const promise = bgAudio.play();
+ if (promise && promise.then) promise.then(() => {
+  musicIcon.className='fa-solid fa-pause text-lg';
+  musicState.textContent='در حال پخش: معین - بهانه';
+  visualizer.classList.remove('paused');visualizer.classList.add('playing');
+ }).catch(error=>{
+  console.warn('پخش موسیقی انجام نشد:',error);
+  musicState.textContent='برای پخش دوباره کلیک کنید';
+  showToast('پخش موسیقی ممکن نشد؛ دوباره روی دکمه پخش بزنید.');
+ });
+}
+function toggleAudio() {
+ if (bgAudio.paused) playMusic();
+ else {
+  bgAudio.pause();musicIcon.className='fa-solid fa-play text-lg';musicState.textContent='متوقف شد';
+  visualizer.classList.remove('playing');visualizer.classList.add('paused');
+ }
+}
+function triggerStartCelebration() {
+ if (startOverlay.dataset.started === '1') return;
+ startOverlay.dataset.started='1';
+ startOverlay.classList.add('opacity-0','pointer-events-none');
+ setTimeout(()=>{startOverlay.style.display='none';},500);
+ playMusic();fireConfetti();createBalloons(15);
+}
+startBtn.addEventListener('click',triggerStartCelebration);
+volumeSlider.addEventListener('input',()=>{bgAudio.volume=Number(volumeSlider.value);});
+$('toggle-music-btn').addEventListener('click',toggleAudio);
+
+function renderCarousel() {
+ carouselTrack.replaceChildren();
+ const total = galleryImages.length;
+ if (!total) return;
+ const increment = 360/total;
+ const safeTotal = Math.max(3,total);
+ const width = carouselTrack.clientWidth || 190;
+ // Keep adjacent cards tangent instead of forcing them into a small fixed radius.
+ // This is especially important when there are only 3–5 photos.
+ const radius = Math.ceil((width / 2) / Math.tan(Math.PI / safeTotal));
+ galleryImages.forEach((src,index)=>{
+  const card=document.createElement('button');
+  card.type='button';card.className='carousel-card';card.setAttribute('aria-label',`نمایش عکس ${index+1}`);
+  card.style.transform=`rotateY(${increment*index}deg) translateZ(${radius}px)`;
+  const img=document.createElement('img');
+  img.src=src;img.alt=`عکس یادگاری ${index+1}`;img.loading='lazy';
+  img.onerror=()=>{img.onerror=null;img.src='https://placehold.co/600x800/1c2541/FFF?text=Birthday';};
+  card.appendChild(img);
+  card.addEventListener('click',()=>openImageModal(index));
+  carouselTrack.appendChild(card);
+ });
+ rotateCarousel();
+}
+function rotateCarousel(){carouselTrack.style.transform=`rotateY(${carouselAngle}deg)`;}
+let carouselResizeTimer;
+window.addEventListener('resize',()=>{
+ clearTimeout(carouselResizeTimer);
+ carouselResizeTimer=setTimeout(renderCarousel,120);
+});
+function nextSlide(){if(!galleryImages.length)return;carouselAngle-=360/galleryImages.length;rotateCarousel();}
+function prevSlide(){if(!galleryImages.length)return;carouselAngle+=360/galleryImages.length;rotateCarousel();}
+function startAutoRotation(){
+ if(autoRotateInterval)clearInterval(autoRotateInterval);
+ autoRotateInterval=setInterval(nextSlide,3200);isAutoRotating=true;
+ $('play-icon').className='fa-solid fa-pause';$('play-status').textContent='توقف چرخش';
+}
+function stopAutoRotation(){
+ if(autoRotateInterval){clearInterval(autoRotateInterval);autoRotateInterval=null;}
+ isAutoRotating=false;$('play-icon').className='fa-solid fa-play';$('play-status').textContent='شروع چرخش';
+}
+$('prev-btn').addEventListener('click',prevSlide);
+$('next-btn').addEventListener('click',nextSlide);
+$('play-pause-carousel').addEventListener('click',()=>{
+ if(isAutoRotating){stopAutoRotation();showToast('چرخش متوقف شد');}
+ else{startAutoRotation();showToast('چرخش فعال شد');}
+});
+
+imageUpload.addEventListener('change',async event=>{
+ const files=Array.from(event.target.files||[]);
+ if(!files.length)return;
+ let added=0;
+ for(const file of files){
+  if(!file.type.startsWith('image/'))continue;
+  try{
+   const data=await new Promise((resolve,reject)=>{
+    const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(file);
+   });
+   galleryImages.unshift(data);added++;
+  }catch(error){console.error(error);}
+ }
+ if(added){
+  await replaceStoredImages(galleryImages);
+  renderCarousel();showToast(`${added} عکس اضافه شد و ذخیره شد 📸`);
+ }
+ imageUpload.value='';
+});
+function openImageModal(index){
+ if(index<0||index>=galleryImages.length)return;
+ activeModalIndex=index;modalImg.src=galleryImages[index];$('modal-caption').textContent=`عکس یادگاری ${index+1}`;
+ imageModal.classList.remove('hidden');
+ requestAnimationFrame(()=>imageModal.classList.remove('opacity-0'));
+ stopAutoRotation();
+}
+function closeModal(){
+ imageModal.classList.add('opacity-0');
+ setTimeout(()=>{imageModal.classList.add('hidden');modalImg.src='';activeModalIndex=-1;},300);
+}
+$('close-modal-btn').addEventListener('click',closeModal);
+imageModal.addEventListener('click',event=>{if(event.target===imageModal)closeModal();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!imageModal.classList.contains('hidden'))closeModal();});
+$('delete-photo-btn').addEventListener('click',async()=>{
+ if(activeModalIndex<0)return;
+ galleryImages.splice(activeModalIndex,1);
+ await replaceStoredImages(galleryImages);
+ closeModal();
+ if(!galleryImages.length)galleryImages=[...defaultImages];
+ renderCarousel();showToast('عکس حذف شد');
+});
+
+$('download-package-btn').addEventListener('click',()=>{
+ try{
+  showToast('در حال آماده‌سازی فایل آفلاین...');
+  const clone=document.documentElement.cloneNode(true);
+  const clonedOverlay=clone.querySelector('#start-overlay');
+  if(clonedOverlay){clonedOverlay.dataset.started='';clonedOverlay.style.display='';clonedOverlay.classList.remove('opacity-0','pointer-events-none');}
+  const injection=clone.ownerDocument.createElement('script');
+  injection.textContent='window.INITIAL_OFFLINE_IMAGES = '+JSON.stringify(galleryImages).replace(/</g,'\\u003c')+';';
+  clone.querySelector('head').appendChild(injection);
+  const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`جشن_تولد_سوپرایز_${new Date().toISOString().slice(0,10)}.html`;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  showToast('فایل HTML دانلود شد؛ برای برخی امکانات آفلاین اینترنت لازم است.');
+ }catch(error){console.error(error);showToast('ساخت فایل خروجی ناموفق بود.');}
+});
+
+let typingTimeoutId=null;
+function typeWriter(message,index=0){
+ clearTimeout(typingTimeoutId);
+ const el=$('typewriter-text');
+ if(index===0)el.textContent='';
+ if(index<message.length){
+  el.textContent+=message.charAt(index);
+  typingTimeoutId=setTimeout(()=>typeWriter(message,index+1),45);
+ }
+}
+function triggerNextWish(){
+ currentWishIndex=(currentWishIndex+1)%wishMessages.length;
+ typeWriter(wishMessages[currentWishIndex]);
+}
+$('random-wish-btn').addEventListener('click',()=>{triggerNextWish();showToast('پیام آرزوی جدید دریافت شد! ✨');});
+
+function createBalloons(count=15){
+ const container=$('balloons-container');
+ const colors=['#ec4899','#a855f7','#eab308','#3b82f6','#10b981','#f43f5e'];
+ for(let i=0;i<count;i++){
+  const balloon=document.createElement('div');balloon.className='balloon';
+  const size=Math.floor(Math.random()*25)+35;
+  const color=colors[Math.floor(Math.random()*colors.length)];
+  const duration=Math.random()*8+8;const delay=Math.random()*2;
+  balloon.style.width=`${size}px`;balloon.style.height=`${size*1.25}px`;
+  balloon.style.background=`radial-gradient(circle at 30% 30%, ${color}, #000 90%)`;
+  balloon.style.left=`${Math.random()*100}%`;balloon.style.animationDuration=`${duration}s`;balloon.style.animationDelay=`${delay}s`;
+  container.appendChild(balloon);setTimeout(()=>balloon.remove(),(duration+delay)*1000+500);
+ }
+}
+function fireConfetti(){
+ if(typeof confetti!=='function'){showToast('افکت کاغذ رنگی به اینترنت نیاز دارد.');return;}
+ const end=Date.now()+2200;const colors=['#ec4899','#a855f7','#facc15','#fff'];
+ (function frame(){
+  confetti({particleCount:4,angle:60,spread:65,origin:{x:0,y:.65},colors});
+  confetti({particleCount:4,angle:120,spread:65,origin:{x:1,y:.65},colors});
+  if(Date.now()<end)requestAnimationFrame(frame);
+ })();
+}
+$('confetti-btn').addEventListener('click',()=>{fireConfetti();showToast('🎉 تولدت مبارک!');});
+$('balloons-btn').addEventListener('click',()=>{createBalloons(20);showToast('🎈 بادکنک‌ها پرواز کردند!');});
+candleFlame.addEventListener('click',()=>{
+ if(candleFlame.textContent.trim()==='🔥'){
+  candleFlame.textContent='💨';candleStatus.textContent='آرزوت برآورده شد! شمع خاموش شد 🎂✨';
+  fireConfetti();showToast('✨ آرزوی قشنگت مستجاب میشه!');
+  setTimeout(()=>{candleFlame.textContent='🕯️';},1500);
+ }else if(candleFlame.textContent.trim()==='🕯️'){
+  candleFlame.textContent='🔥';candleStatus.textContent='روی شعله کلیک کن تا آرزوت برآورده بشه!';
+ }
+});
+
+window.addEventListener('DOMContentLoaded',async()=>{
+ const offline=Array.isArray(window.INITIAL_OFFLINE_IMAGES)?window.INITIAL_OFFLINE_IMAGES:[];
+ const stored=offline.length?offline:await loadStoredImages();
+ galleryImages=stored.length?stored:[...defaultImages];
+ renderCarousel();startAutoRotation();typeWriter(wishMessages[0]);createBalloons(10);
+});
+window.addEventListener('resize',()=>{
+ clearTimeout(window.__birthdayResizeTimer);
+ window.__birthdayResizeTimer=setTimeout(()=>{renderCarousel();},150);
+});
+document.addEventListener('visibilitychange',()=>{
+ if(document.hidden&&isAutoRotating)stopAutoRotation();
+});
+</script>
 </body>
 </html>
