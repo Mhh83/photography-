@@ -58,21 +58,25 @@
 
         /* 3D Carousel Container */
         .carousel-container {
-            perspective: 1200px;
+            perspective: 1400px;
             width: 100%;
-            height: 380px;
+            height: 360px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: visible;
+            z-index: 5;
         }
 
         .carousel-track {
-            width: 250px;
-            height: 330px;
+            width: min(66vw, 260px);
+            height: min(82vw, 320px);
             position: absolute;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+            z-index: 10;
         }
 
         .carousel-card {
@@ -86,6 +90,7 @@
             transition: all 0.5s ease;
             cursor: pointer;
             background: #111827;
+            backface-visibility: hidden;
         }
 
         .carousel-card img {
@@ -197,12 +202,12 @@
             }
 
             .carousel-container {
-                height: 260px;
+                height: 270px;
             }
 
             .carousel-track {
-                width: min(62vw, 200px);
-                height: min(82vw, 260px);
+                width: min(62vw, 210px);
+                height: min(80vw, 260px);
             }
 
             .carousel-card {
@@ -267,7 +272,7 @@
             <p class="text-sm md:text-base text-slate-200 leading-relaxed">
                 یک سوپرایز ویژه با آهنگ معروف «معین - بهانه» برای شما آماده شده است!
             </p>
-            <button id="start-celebration-btn" class="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white font-bold text-lg shadow-xl hover:scale-105 active:scale-95 transition-transform duration-200">
+            <button id="start-celebration-btn" class="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white font-bold text-lg shadow-xl hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-3">
                 <i class="fa-solid fa-music text-xl animate-spin"></i>
                 <span>شروع جشن و پخش موزیک</span>
             </button>
@@ -321,7 +326,7 @@
                     </label>
 
                     <!-- Save / Download Offline Package -->
-                    <button id="download-package-btn" class="glass-button px-4 py-2 rounded-xl text-xs md:text-sm font-semibold text-yellow-300 border border-yellow-500/40 hover:text-white transition">
+                    <button id="download-package-btn" class="glass-button px-4 py-2 rounded-xl text-xs md:text-sm font-semibold text-yellow-300 border border-yellow-500/40 hover:text-white transition flex items-center gap-2">
                         <i class="fa-solid fa-download text-yellow-400"></i>
                         <span>دانلود خروجی آفلاین</span>
                     </button>
@@ -336,7 +341,7 @@
             </div>
 
             <!-- Carousel Controls -->
-            <div class="flex items-center gap-6 z-20">
+            <div class="flex items-center gap-6 z-20 relative">
                 <button id="prev-btn" class="glass-button w-12 h-12 rounded-full flex items-center justify-center text-xl text-pink-300 hover:text-white active:scale-95" title="عکس قبلی">
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
@@ -380,7 +385,7 @@
                         </div>
 
                         <!-- Play/Pause Button -->
-                        <button id="toggle-music-btn" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition active:scale-95">
+                        <button id="toggle-music-btn" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg">
                             <i class="fa-solid fa-play text-lg" id="music-icon"></i>
                         </button>
                     </div>
@@ -394,11 +399,11 @@
 
                 <!-- Celebration Action Buttons -->
                 <div class="grid grid-cols-2 gap-3">
-                    <button id="confetti-btn" class="glass-button py-3 px-4 rounded-2xl text-xs md:text-sm font-bold text-yellow-300 flex items-center justify-center gap-2 border border-yellow-500/30">
+                    <button id="confetti-btn" class="glass-button py-3 px-4 rounded-2xl text-xs md:text-sm font-bold text-yellow-300 flex items-center justify-center gap-2 border border-yellow-500/30 hover:text-white transition">
                         <i class="fa-solid fa-wand-magic-sparkles text-lg text-yellow-400"></i>
                         <span>شلیک کاغذ رنگی</span>
                     </button>
-                    <button id="balloons-btn" class="glass-button py-3 px-4 rounded-2xl text-xs md:text-sm font-bold text-pink-300 flex items-center justify-center gap-2 border border-pink-500/30">
+                    <button id="balloons-btn" class="glass-button py-3 px-4 rounded-2xl text-xs md:text-sm font-bold text-pink-300 flex items-center justify-center gap-2 border border-pink-500/30 hover:text-white transition">
                         <i class="fa-solid fa-balloon text-lg text-pink-400"></i>
                         <span>پرواز بادکنک‌ها</span>
                     </button>
@@ -416,7 +421,7 @@
 
                 <!-- Interactive Candle Box -->
                 <div class="bg-slate-900/60 p-5 rounded-2xl text-center border border-white/10 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-                    <div id="candle-flame" class="text-4xl text-yellow-400 animate-bounce cursor-pointer transition-transform duration-300 hover:scale-125" title="برای فوت کردن کلیک کن!">
+                    <div id="candle-flame" class="text-4xl text-yellow-400 animate-bounce cursor-pointer transition-transform duration-300 hover:scale-125" title="برای فوت کردن کلیک کن">
                         🔥
                     </div>
                     <div id="candle-status" class="text-sm font-semibold text-yellow-200">
@@ -457,7 +462,7 @@
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white px-6 py-3 rounded-full border border-pink-500/50 shadow-2xl opacity-0 pointer-events-none transition duration-300">
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white px-6 py-3 rounded-full border border-pink-500/50 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-[60]">
         <i class="fa-solid fa-star text-yellow-400"></i>
         <span id="toast-message">پیام سیستم</span>
     </div>
@@ -641,14 +646,15 @@
             if (totalCards === 0) return;
 
             const angleIncrement = 360 / totalCards;
-            const radius = Math.round(150 / Math.tan(Math.PI / totalCards));
+            const safeTotal = Math.max(2, totalCards);
+            const radius = Math.min(190, Math.round(170 / Math.tan(Math.PI / safeTotal)));
 
             galleryImages.forEach((src, index) => {
                 const card = document.createElement('div');
                 card.className = 'carousel-card';
                 
                 const cardAngle = angleIncrement * index;
-                card.style.transform = `rotateY(${cardAngle}deg) translateZ(${Math.max(radius, 230)}px)`;
+                card.style.transform = `rotateY(${cardAngle}deg) translateZ(${Math.max(radius, 150)}px)`;
                 
                 const img = document.createElement('img');
                 img.src = src;
@@ -931,7 +937,6 @@
 
         // --- 12. App Initialization ---
         window.addEventListener('DOMContentLoaded', async () => {
-            // Check if there are images embedded in exported file or stored in IndexedDB
             let stored = [];
             if (window.INITIAL_OFFLINE_IMAGES && window.INITIAL_OFFLINE_IMAGES.length > 0) {
                 stored = window.INITIAL_OFFLINE_IMAGES;
